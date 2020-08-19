@@ -1,4 +1,4 @@
-import { RootPost } from "../domain/rootPost";
+import { RootPost } from "../domain/root-post/rootPost";
 import RootTag from "../domain/rootTag";
 
 // DB上のテーブル

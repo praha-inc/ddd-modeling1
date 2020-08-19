@@ -1,4 +1,4 @@
-import { RootPost } from "../domain/rootPost";
+import { RootPost } from "../domain/root-post/rootPost";
 
 // DB上のテーブル
 type PostDataModel = {}

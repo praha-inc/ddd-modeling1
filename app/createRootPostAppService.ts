@@ -1,4 +1,4 @@
-import { RootPost } from "../domain/rootPost";
+import { RootPost } from "../domain/root-post/rootPost";
 import { randomId } from "../id";
 import RootPostRepoImpl from "../infra/rootPostRepoImpl";
 import RootTag from "../domain/rootTag";
