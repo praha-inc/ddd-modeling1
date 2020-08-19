@@ -7,6 +7,7 @@ type TagDataModel = {}
 type Connection = {
   save: (input: TagDataModel) => {}
   findByContent: (input: any) => {}
+  findByPostId: (postId: string) => {}
 }
 
 export default class RootTagRepoImpl {
@@ -29,5 +30,8 @@ export default class RootTagRepoImpl {
       await this.save(rootTag)
     }
     return 'saved!'
+  }
+  public async findByPostId(postId: string) {
+    return [new RootTag('existingTag', ['1', '2', '3'])]
   }
 };
