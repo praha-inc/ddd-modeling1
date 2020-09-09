@@ -8,4 +8,3 @@
     update(team: Team): Promise<Team>;
     create(team: Team): Promise<Team>
   }
-  

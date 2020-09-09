@@ -1,18 +1,23 @@
-  export class Team {
-    public readonly id: string
-    public readonly clerkUserIds: string[]
-    private static limit = 1
-    public constructor(params: { id: string; clerkUserIds: string[] }) {
-      const { id, clerkUserIds } = params
+export class Team {
+  private readonly id: string
+  private readonly clerkUserIds: string[]
+  private static limit = 1
+  private readonly paid: boolean
+  public constructor(params: { id: string; clerkUserIds: string[], paid: boolean }) {
+    const { id, clerkUserIds, paid } = params
 
-      if (clerkUserIds.length < Team.limit) {
-        throw new Error(`cannot create team with user count below: ${Team.limit}`)
-      }
-      this.id = id
-      this.clerkUserIds = clerkUserIds
+    if (clerkUserIds.length < Team.limit) {
+      throw new Error(`cannot create team with user count below: ${Team.limit}`)
     }
-    public isEqual(otherTeam: Team) {
-      return otherTeam.id === this.id
-    }
+    this.id = id
+    this.clerkUserIds = clerkUserIds
+    this.paid = paid
   }
-  
+  public isEqual(otherTeam: Team) {
+    return otherTeam.id === this.id
+  }
+
+  public isPaid() {
+    return this.paid
+  }
+}
