@@ -1,4 +1,3 @@
-
   export class Team {
     public readonly id: string
     public readonly clerkUserIds: string[]

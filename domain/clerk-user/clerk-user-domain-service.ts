@@ -1,5 +1,23 @@
+import { TeamRepository } from "../team/repository/team-repository";
+import { ClerkUserRepository } from "./repository/clerk-user-repository";
+import { Team } from "../team/entity/team";
+
 export class ClerkUserDomainService {
-  public async deleteUser(id: String) {
-    // teamがuser0人状態になっていないことを確認する
+  private readonly teamRepo: TeamRepository
+  private readonly userRepo: ClerkUserRepository
+  public constructor(teamrepo: TeamRepository, userRepo: ClerkUserRepository) {
+    this.teamRepo = teamrepo
+    this.userRepo = userRepo
   }
+  public async deleteUser(userId: String) {
+    const user = await this.userRepo.find(userId)
+    const team = await this.teamRepo.find(user.teamId)
+    const updatedTeam = this.removeUserFromTeam(team, userId)
+    await this.teamRepo.update(updatedTeam)
+    await this.userRepo.delete(user.id)
+  }
+
+  private removeUserFromTeam(team: Team, userId: String) {
+    return team // memo: teamからuserIdを削除するイメージ
+  } 
 }

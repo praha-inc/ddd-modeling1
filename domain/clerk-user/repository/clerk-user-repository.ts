@@ -3,8 +3,8 @@
 
   export interface ClerkUserRepository {
     index(): Promise<ClerkUser[]>;
-    find(id: string): Promise<ClerkUser>;
-    delete(id: string): Promise<void>;
+    find(id: String): Promise<ClerkUser>;
+    delete(id: String): Promise<void>;
     update(clerkUser: ClerkUser): Promise<ClerkUser>;
   }
   

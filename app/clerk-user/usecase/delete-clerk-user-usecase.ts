@@ -7,9 +7,9 @@ export class DeleteClerkUserUsecase {
     this.clerkUserDS = clerkUserDS
   }
 
-  public async do(id: string) {
+  public async do(userId: string) {
     try {
-      await this.clerkUserDS.deleteUser(id)
+      await this.clerkUserDS.deleteUser(userId)
     } catch (error) {
       // todo: error handling
       console.error(error)
