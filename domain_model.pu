@@ -1,0 +1,74 @@
+@startuml
+
+package Post集約 <<Folder>> {
+  class RootPost {
+      String teamId
+      String postId
+      String[] tagIds
+  }
+  note bottom: 1つのpost紐づけられる\nタグは5つまで
+
+  class Post {
+      String id
+      String content
+  }
+  note bottom: contentは300文字以内
+
+  RootPost *-> Post
+}
+
+package Tag集約 <<Folder>> {
+  class RootTag {
+      String tagId
+      String[] postIds
+      String teamId
+  }
+  note bottom: 1つのタグにつけられる\npostの上限数が存在する
+
+  class Tag {
+      String id
+      String content
+  }
+  note bottom: タグは最低1文字\nタグは最低100文字以内
+
+  RootTag *-> Tag
+}
+
+package ClearkUser <<Folder>> {
+    class ClearkUser {
+        String id
+        String teamId
+    }
+}
+
+package SlackUser <<Folder>> {
+    class SlackUser {
+        String clearkUserId
+    }
+}
+
+package GitHubUser <<Folder>> {
+    class GitHubUser {
+        String clearkUserId
+    }
+}
+
+package Team <<Folder>> {
+    class Team {
+        String id
+    }
+}
+
+package InvitationCode <<Folder>> {
+    class InvitationCode {
+        String teamId
+    }
+}
+
+InvitationCode o-> Team
+ClearkUser o-> Team
+SlackUser o-> ClearkUser
+GitHubUser o-> ClearkUser
+RootPost o-> Team
+RootTag o-> TEam
+@enduml
