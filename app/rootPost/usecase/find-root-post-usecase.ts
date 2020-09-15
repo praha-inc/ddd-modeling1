@@ -1,18 +1,18 @@
-import { SlackUser } from "../../../domain/slack-user/entity/slack-user";
-import { SlackUserRepository } from "../../../domain/slack-user/repository/slack-user-repository";
-import { SlackUserDTO } from "../dto/slack-user-dto";
+import { RootPost } from "../../../domain/root-post/entity/root-post";
+import { RootPostRepository } from "../../../domain/root-post/repository/root-post-repository";
+import { RootPostDTO } from "../dto/root-post-dto";
 
-export class FindSlackUserUsecase {
-  private readonly slackUserRepo: SlackUserRepository;
+export class FindRootPostUsecase {
+  private readonly rootPostRepo: RootPostRepository;
 
-  public constructor(slackUserRepo: SlackUserRepository) {
-    this.slackUserRepo = slackUserRepo;
+  public constructor(rootPostRepo: RootPostRepository) {
+    this.rootPostRepo = rootPostRepo;
   }
 
-  public async do(id: string) {
-    const slackUser: SlackUser = await this.slackUserRepo.find(id);
-    if (!slackUser) return undefined;
+  public async do(id: string, teamId?: number, userId?: number) {
+    const rootPost: RootPost = await this.rootPostRepo.find(id, teamId, userId);
+    if (!rootPost) return undefined;
 
-    return new SlackUserDTO(slackUser);
+    return new RootPostDTO(rootPost);
   }
 }
