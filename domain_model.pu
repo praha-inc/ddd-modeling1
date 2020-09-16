@@ -2,15 +2,15 @@
 
 package Post集約 <<Folder>> {
   class RootPost {
-      String teamId
-      String postId
-      String[] tagIds
+      string teamId
+      string postId
+      string[] tagIds
   }
   note bottom: 1つのpost紐づけられる\nタグは5つまで
 
   class Post {
-      String id
-      String content
+      string id
+      string content
   }
   note bottom: contentは300文字以内
 
@@ -19,15 +19,15 @@ package Post集約 <<Folder>> {
 
 package Tag集約 <<Folder>> {
   class RootTag {
-      String tagId
-      String[] postIds
-      String teamId
+      string tagId
+      string[] postIds
+      string teamId
   }
   note bottom: 1つのタグにつけられる\npostの上限数が存在する
 
   class Tag {
-      String id
-      String content
+      string id
+      string content
   }
   note bottom: タグは最低1文字\nタグは最低100文字以内
 
@@ -36,32 +36,32 @@ package Tag集約 <<Folder>> {
 
 package ClearkUser <<Folder>> {
     class ClearkUser {
-        String id
-        String teamId
+        string id
+        string teamId
     }
 }
 
 package SlackUser <<Folder>> {
     class SlackUser {
-        String clearkUserId
+        string clearkUserId
     }
 }
 
 package GitHubUser <<Folder>> {
     class GitHubUser {
-        String clearkUserId
+        string clearkUserId
     }
 }
 
 package Team <<Folder>> {
     class Team {
-        String id
+        string id
     }
 }
 
 package InvitationCode <<Folder>> {
     class InvitationCode {
-        String teamId
+        string teamId
     }
 }
 

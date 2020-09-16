@@ -6,5 +6,6 @@
     find(id: string): Promise<Team>;
     delete(id: string): Promise<void>;
     update(team: Team): Promise<Team>;
+    create(team: Team): Promise<Team>
   }
   
