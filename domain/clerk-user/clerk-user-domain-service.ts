@@ -9,7 +9,7 @@ export class ClerkUserDomainService {
     this.teamRepo = teamrepo
     this.userRepo = userRepo
   }
-  public async deleteUser(userId: String) {
+  public async deleteUser(userId: string) {
     const user = await this.userRepo.find(userId)
     const team = await this.teamRepo.find(user.teamId)
     const updatedTeam = this.removeUserFromTeam(team, userId)
@@ -17,7 +17,7 @@ export class ClerkUserDomainService {
     await this.userRepo.delete(user.id)
   }
 
-  private removeUserFromTeam(team: Team, userId: String) {
+  private removeUserFromTeam(team: Team, userId: string) {
     return new Team({...team}) // memo: この時、teamからuserIdをfindIndexして削除するイメージ。面倒なので省略
   } 
 }
