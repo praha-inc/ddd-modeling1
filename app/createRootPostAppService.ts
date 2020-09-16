@@ -3,23 +3,25 @@ import { randomId } from "../id";
 import RootPostRepoImpl from "../infra/rootPostRepoImpl";
 import RootTag from "../domain/rootTag";
 import RootTagRepoImpl from "../infra/rootTagRepoImpl";
+import { RootPostDomainService } from "../domain/root-post/rootPostDomainService"
+import { TeamRepository } from "../domain/team/repository/team-repository"
 
 export class CreateRootPostAppService {
-  private readonly postRepo: RootPostRepoImpl // 本当はinterfaceにするべき
   private readonly tagRepo: RootTagRepoImpl // 本当はinterfaceにするべき
+  private readonly rootPostDomainService: RootPostDomainService
 
-  constructor(postRepo: RootPostRepoImpl, tagRepo: RootTagRepoImpl) {
-    this.postRepo = postRepo
+  constructor(tagRepo: RootTagRepoImpl, rootPostDomainService: RootPostDomainService) {
     this.tagRepo = tagRepo
+    this.rootPostDomainService = rootPostDomainService
   }
 
-  public async do(content: string, tagContents: string[]) {
+  public async do(content: string, tagContents: string[], teamId: string) {
     const newPostId = 'newPost'
 
     const rootTags = this.addPostToRootTags(tagContents, newPostId)
     const rootPost = new RootPost({id: randomId(), content, tagIds: rootTags.map((rootTag) => rootTag.tag.id)})
     await this.tagRepo.saveAll(rootTags)
-    await this.postRepo.save(rootPost)
+    await this.rootPostDomainService.createRootPost(rootPost, teamId)
   }
 
   private addPostToRootTags(contents: string[], newPostId: string) {
