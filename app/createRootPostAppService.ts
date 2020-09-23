@@ -1,17 +1,19 @@
-import { RootPost } from "../domain/root-post/entity/root-post";
 import { Status } from "../domain/root-post/valueObject/status";
 import { randomId } from "../id";
 import RootPostRepoImpl from "../infra/rootPostRepoImpl";
 import RootTag from "../domain/rootTag";
 import RootTagRepoImpl from "../infra/rootTagRepoImpl";
+import { RootPostFactory } from "../domain/root-post/factory/rootPostFactory";
 
 export class CreateRootPostAppService {
   private readonly postRepo: RootPostRepoImpl; // 本当はinterfaceにするべき
   private readonly tagRepo: RootTagRepoImpl; // 本当はinterfaceにするべき
+  private readonly postFactory: RootPostFactory;
 
-  constructor(postRepo: RootPostRepoImpl, tagRepo: RootTagRepoImpl) {
+  constructor(postRepo: RootPostRepoImpl, tagRepo: RootTagRepoImpl, postFactory: RootPostFactory) {
     this.postRepo = postRepo;
     this.tagRepo = tagRepo;
+    this.postFactory = postFactory
   }
 
   public async do(
@@ -24,14 +26,14 @@ export class CreateRootPostAppService {
     const newPostId = "newPost";
 
     const rootTags = this.addPostToRootTags(tagContents, newPostId);
-    const rootPost = new RootPost({
+    const rootPost = await this.postFactory.createRootPost({
       id: randomId(),
       content,
       status,
       teamId,
       userId,
       tagIds: rootTags.map((rootTag) => rootTag.tag.id),
-    });
+    })
     await this.tagRepo.saveAll(rootTags);
     await this.postRepo.save(rootPost);
   }

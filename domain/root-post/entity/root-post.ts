@@ -37,12 +37,15 @@ export class RootPost {
     teamId: string;
     userId: string;
     tagIds: string[];
+    isCreatingUserAdmin: boolean
   }) {
-    const { id, content, status, teamId, userId, tagIds } = params;
+    const { id, content, status, teamId, userId, tagIds, isCreatingUserAdmin } = params;
     this.post = new Post(id, content, status, teamId, userId);
     this.tagIds = tagIds;
 
     if (this.tagIds.length > 5)
       throw new Error("一つのpost紐づけられるタグは5つまでです！");
+
+    if (isCreatingUserAdmin && status.status === 'show') throw new Error("status showを選択できるのはadminだけです")
   }
 }
