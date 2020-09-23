@@ -1,4 +1,4 @@
-export type Status = "show" | "team" | "hide";
+import { Status } from "../valueObject/status";
 
 class Post {
   public readonly id: string;
@@ -6,7 +6,6 @@ class Post {
   public readonly status: Status;
   public readonly teamId: number;
   public readonly userId: number;
-  // static statusCode: Status;
 
   constructor(
     id: string,

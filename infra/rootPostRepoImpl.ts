@@ -1,5 +1,5 @@
 import { RootPost } from "../domain/root-post/entity/root-post";
-import type { Status } from "../domain/root-post/entity/root-post";
+import { Status } from "../domain/root-post/valueObject/status";
 
 // DB上のテーブル
 type PostDataModel = {};
@@ -22,10 +22,11 @@ export default class RootPostRepoImpl {
     // teamId: チームID (公開範囲がチーム内限定の場合に使用)
     // userId: チームID (公開範囲が非公開の場合に使用)
 
+    // 検索に一致したものを返す
     return new RootPost({
       id: "existingPostId",
       content: "hogehoge",
-      status: "show",
+      status: new Status("show"),
       teamId: 1,
       userId: 1,
       tagIds: ["1", "2"],
