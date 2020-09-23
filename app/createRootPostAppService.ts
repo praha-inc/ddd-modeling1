@@ -1,5 +1,5 @@
 import { RootPost } from "../domain/root-post/entity/root-post";
-import type { Status } from "../domain/root-post/entity/root-post";
+import { Status } from "../domain/root-post/valueObject/status";
 import { randomId } from "../id";
 import RootPostRepoImpl from "../infra/rootPostRepoImpl";
 import RootTag from "../domain/rootTag";
@@ -17,8 +17,8 @@ export class CreateRootPostAppService {
   public async do(
     content: string,
     status: Status,
-    teamId: number,
-    userId: number,
+    teamId: string,
+    userId: string,
     tagContents: string[]
   ) {
     const newPostId = "newPost";
@@ -57,6 +57,7 @@ export class CreateRootPostAppService {
   private addPostToExistingRootTag(rootTag: RootTag, newPostId: string) {
     return new RootTag(rootTag.tag.content, [...rootTag.postIds, newPostId]);
   }
+
   private createNewRootTag(newTagContent: string, newPostId: string) {
     return new RootTag(newTagContent, [newPostId]);
   }

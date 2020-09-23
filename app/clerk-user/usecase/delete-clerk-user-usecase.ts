@@ -1,20 +1,18 @@
+import { ClerkUserDomainService } from '../../../domain/clerk-user/clerk-user-domain-service'
 
-  import { ClerkUserRepository } from '../../../domain/clerk-user/repository/clerk-user-repository'
+export class DeleteClerkUserUsecase {
+  private readonly clerkUserDS: ClerkUserDomainService
 
-  export class DeleteClerkUserUsecase {
-    private readonly clerkUserRepo: ClerkUserRepository
+  public constructor(clerkUserDS: ClerkUserDomainService) {
+    this.clerkUserDS = clerkUserDS
+  }
 
-    public constructor(clerkUserRepo: ClerkUserRepository) {
-      this.clerkUserRepo = clerkUserRepo
-    }
-
-    public async do(id: string) {
-      try {
-        await this.clerkUserRepo.delete(id)
-      } catch (error) {
-        // todo: error handling
-        console.error(error)
-      }
+  public async do(userId: string) {
+    try {
+      await this.clerkUserDS.deleteUser(userId)
+    } catch (error) {
+      // todo: error handling
+      console.error(error)
     }
   }
-  
+}

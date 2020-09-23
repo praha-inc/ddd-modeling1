@@ -4,15 +4,15 @@ class Post {
   public readonly id: string;
   public readonly content: string;
   public readonly status: Status;
-  public readonly teamId: number;
-  public readonly userId: number;
+  public readonly teamId: string;
+  public readonly userId: string;
 
   constructor(
     id: string,
     content: string,
     status: Status,
-    teamId: number,
-    userId: number
+    teamId: string,
+    userId: string
   ) {
     this.id = id;
     this.content = content;
@@ -34,8 +34,8 @@ export class RootPost {
     id: string;
     content: string;
     status: Status;
-    teamId: number;
-    userId: number;
+    teamId: string;
+    userId: string;
     tagIds: string[];
   }) {
     const { id, content, status, teamId, userId, tagIds } = params;
