@@ -3,6 +3,7 @@ import { RootPostFactory } from "../domain/root-post/factory/rootPostFactory";
 import { Status } from "../domain/root-post/valueObject/status";
 
 type Connection = {
+  getUserFromDB: () => { isAdmin: true};
 };
 
 export class RootPostFactoryImpl implements RootPostFactory {
@@ -10,7 +11,6 @@ export class RootPostFactoryImpl implements RootPostFactory {
   constructor(conn: Connection) {
     this.conn = conn;
   }
-
   public createRootPost(params: {
     id: string;
     content: string;
@@ -22,7 +22,7 @@ export class RootPostFactoryImpl implements RootPostFactory {
     const { id, content, status, teamId, userId, tagIds } = params
 
     // memo: 本来はここでuserIdからユーザを取得して、ユーザ状態がadminか否か確認する
-    const userFromDB = {isAdmin: true}
+    const userFromDB = this.conn.getUserFromDB()
 
     return new Promise<RootPost>((resolve) => {
       resolve(new RootPost({
