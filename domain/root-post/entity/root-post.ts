@@ -46,6 +46,6 @@ export class RootPost {
     if (this.tagIds.length > 5)
       throw new Error("一つのpost紐づけられるタグは5つまでです！");
 
-    if (isCreatingUserAdmin && status.status === 'show') throw new Error("status showを選択できるのはadminだけです")
+    if (!isCreatingUserAdmin && status.status === 'show') throw new Error("status showを選択できるのはadminだけです")
   }
 }

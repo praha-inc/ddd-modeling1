@@ -5,6 +5,7 @@ import { RootPost } from "./entity/root-post";
 import { Status } from "./valueObject/status";
 import RootTag from "../rootTag";
 import { TeamRepository } from "../team/repository/team-repository";
+import { RootPostFactory } from "./factory/rootPostFactory";
 
 export class RootPostDomainService {
   private readonly postRepo: RootPostRepoImpl; // 本当はinterfaceにするべき
