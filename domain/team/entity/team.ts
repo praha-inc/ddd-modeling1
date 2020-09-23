@@ -20,4 +20,16 @@ export class Team {
   public isPaid() {
     return this.paid
   }
+
+  public isPaymentRequired() {
+    return this.clerkUserIds.length >= 10
+  }
+
+  public getId() {
+    return this.id
+  }
+
+  public getClerkUserIds() {
+    return this.clerkUserIds
+  }
 }
