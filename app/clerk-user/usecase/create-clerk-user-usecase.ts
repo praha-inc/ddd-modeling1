@@ -1,7 +1,7 @@
 import { ClerkUserRepository } from "../../../domain/clerk-user/repository/clerk-user-repository";
 import { ClerkUserDTO } from "../dto/clerk-user-dto";
 
-export class DeleteClerkUserUsecase {
+export class CreateClerkUserUsecase {
   private readonly clerkUserRepo: ClerkUserRepository;
   public constructor(clerkUserRepo: ClerkUserRepository) {
     this.clerkUserRepo = clerkUserRepo;
