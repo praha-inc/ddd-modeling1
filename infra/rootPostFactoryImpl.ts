@@ -2,6 +2,7 @@ import { RootPost } from "../domain/root-post/entity/root-post";
 import { RootPostFactory } from "../domain/root-post/factory/rootPostFactory";
 import { Status } from "../domain/root-post/valueObject/status";
 import RootTag from "../domain/rootTag";
+import { TeamRepository } from "../domain/team/repository/team-repository";
 import { randomId } from "../id";
 import RootTagRepoImpl from "./rootTagRepoImpl";
 import UserRepoImpl from "./userRepoImpl";
@@ -9,18 +10,30 @@ import UserRepoImpl from "./userRepoImpl";
 export class RootPostFactoryImpl implements RootPostFactory {
   private readonly userRepo: UserRepoImpl; // fixme: interfaceにするべき
   private readonly tagRepo: RootTagRepoImpl; // fixme: interfaceにするべき
-  constructor(userRepo: UserRepoImpl, tagRepo: RootTagRepoImpl) {
+  private readonly teamRepo: TeamRepository;
+  constructor(
+    userRepo: UserRepoImpl,
+    tagRepo: RootTagRepoImpl,
+    teamRepo: TeamRepository
+  ) {
     this.userRepo = userRepo;
     this.tagRepo = tagRepo;
+    this.teamRepo = teamRepo;
   }
-  public createRootPost(params: {
+  public async createRootPost(params: {
     content: string;
     tagContents: string[];
     status: Status;
     teamId: string;
     userId: string;
+    createdAt: string;
   }) {
-    const { content, tagContents, status, teamId, userId } = params;
+    const { content, tagContents, status, teamId, userId, createdAt } = params;
+
+    const team = await this.teamRepo.find(teamId);
+    if (!team.isPaid()) {
+      throw Error("This team has not paid!");
+    }
 
     const userThatCreatedPost = this.userRepo.find(userId);
     const newPostId = randomId();
@@ -36,6 +49,7 @@ export class RootPostFactoryImpl implements RootPostFactory {
         userId,
         tagIds,
         isCreatingUserAdmin: userThatCreatedPost.isAdmin,
+        createdAt,
       }),
       rootTags,
     };

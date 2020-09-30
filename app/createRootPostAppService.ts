@@ -23,7 +23,8 @@ export class CreateRootPostAppService {
     status: Status,
     teamId: string,
     userId: string,
-    tagContents: string[]
+    tagContents: string[],
+    createdAt: string
   ) {
     const { rootPost, rootTags } = await this.postFactory.createRootPost({
       content,
@@ -31,6 +32,7 @@ export class CreateRootPostAppService {
       teamId,
       userId,
       tagContents,
+      createdAt,
     });
     await this.tagRepo.saveAll(rootTags);
     await this.postRepo.save(rootPost);

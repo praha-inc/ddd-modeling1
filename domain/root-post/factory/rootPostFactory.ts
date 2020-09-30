@@ -9,5 +9,6 @@ export interface RootPostFactory {
     status: Status;
     teamId: string;
     userId: string;
-  }): { rootPost: RootPost; rootTags: RootTag[] };
+    createdAt: string;
+  }): Promise<{ rootPost: RootPost; rootTags: RootTag[] }>;
 }
