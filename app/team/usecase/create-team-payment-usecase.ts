@@ -14,7 +14,7 @@ export class CreateTeamPaymentUsecase {
             const updatedTeams: Team[] = []
             for (const team of teams) {
                 if (team.isPaymentRequired()) {
-                    team.addTeamPayment({ paymentRequiredDate: new Date() })
+                    team.addTeamPayment({ paymentRequiredDate: new Date(), fee: 10000 })
                     updatedTeams.push(new Team({ id: team.getId(), clerkUserIds: team.getClerkUserIds(), teamPayments: team.getTeamPayments() }))
                 }
             }

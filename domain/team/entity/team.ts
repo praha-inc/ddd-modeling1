@@ -1,13 +1,15 @@
 class TeamPayment {
   private readonly id: string
   private readonly paymentRequiredDate: Date
+  private readonly fee: Number
   private readonly paid: boolean
 
-  public constructor(params: { id: string; paymentRequiredDate: Date, paid: boolean}) {
-    const { id, paymentRequiredDate, paid } = params
+  public constructor(params: { id: string; paymentRequiredDate: Date, paid: boolean, fee: Number}) {
+    const { id, paymentRequiredDate, paid, fee } = params
     this.id = id
     this.paymentRequiredDate = paymentRequiredDate
     this.paid = paid
+    this.fee = fee
   }
 
   public isPaid() {
@@ -55,7 +57,7 @@ export class Team {
     return this.teamPayments
   }
 
-  public addTeamPayment({ paymentRequiredDate }: { paymentRequiredDate: Date }) {
-    this.teamPayments.push(new TeamPayment({ id: 'dummy', paymentRequiredDate, paid: false}))
+  public addTeamPayment({ paymentRequiredDate, fee }: { paymentRequiredDate: Date, fee: Number }) {
+    this.teamPayments.push(new TeamPayment({ id: 'dummy', paymentRequiredDate, paid: false, fee}))
   }
 }
