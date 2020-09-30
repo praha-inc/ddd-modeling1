@@ -6,19 +6,22 @@ class Post {
   public readonly status: Status;
   public readonly teamId: string;
   public readonly userId: string;
+  public readonly createdAt: string;
 
   constructor(
     id: string,
     content: string,
     status: Status,
     teamId: string,
-    userId: string
+    userId: string,
+    createdAt: string
   ) {
     this.id = id;
     this.content = content;
     this.status = status;
     this.teamId = teamId;
     this.userId = userId;
+    this.createdAt = createdAt;
 
     if (this.content.length > 300)
       throw new Error("postは300文字以内でお願いします！");
@@ -38,6 +41,7 @@ export class RootPost {
     userId: string;
     tagIds: string[];
     isCreatingUserAdmin: boolean;
+    createdAt: string;
   }) {
     const {
       id,
@@ -47,8 +51,9 @@ export class RootPost {
       userId,
       tagIds,
       isCreatingUserAdmin,
+      createdAt,
     } = params;
-    this.post = new Post(id, content, status, teamId, userId);
+    this.post = new Post(id, content, status, teamId, userId, createdAt);
     this.tagIds = tagIds;
 
     if (this.tagIds.length > 5)
