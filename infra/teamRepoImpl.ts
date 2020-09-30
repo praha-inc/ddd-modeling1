@@ -16,4 +16,10 @@ export default class TeamRepoImpl {
         id: 'existingTeamId', paid: true
       })
     }
+
+    public async update(team: Team) {
+      // DB接続
+      console.info(team)
+      return true
+    }
 }
