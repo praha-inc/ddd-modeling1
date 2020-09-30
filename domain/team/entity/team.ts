@@ -22,7 +22,7 @@ export class Team {
   private readonly clerkUserIds: string[]
   private readonly teamPayments: TeamPayment[]
   private static limit = 1
-  private static PAYMENT_REQUIRED_MEMBER_COUNT = 10
+  private static PAYMENT_REQUIRED_USER_COUNT = 10
   public constructor(params: { id: string; clerkUserIds: string[], teamPayments: TeamPayment[] }) {
     const { id, clerkUserIds, teamPayments } = params
 
@@ -42,7 +42,7 @@ export class Team {
   }
 
   public isPaymentRequired() {
-    return this.clerkUserIds.length >= Team.PAYMENT_REQUIRED_MEMBER_COUNT
+    return this.clerkUserIds.length >= Team.PAYMENT_REQUIRED_USER_COUNT
   }
 
   public getId() {
