@@ -1,13 +1,13 @@
+import RootTag from "../../rootTag";
 import { RootPost } from "../entity/root-post";
 import { Status } from "../valueObject/status";
 
 export interface RootPostFactory {
   createRootPost(params: {
-    id: string;
     content: string;
+    tagContents: string[];
     status: Status;
     teamId: string;
     userId: string;
-    tagIds: string[];
-  }): Promise<RootPost>
+  }): { rootPost: RootPost; rootTags: RootTag[] };
 }
