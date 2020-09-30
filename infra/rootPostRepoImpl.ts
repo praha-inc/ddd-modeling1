@@ -34,6 +34,11 @@ export default class RootPostRepoImpl {
     });
   }
 
+  public async findIds(criteria: { createdAt: string[] }) {
+    // 検索に一致したものを返す
+    return ["foo", "bar", "baz"];
+  }
+
   public async save(rootPost: RootPost) {
     // DB書き込み
     await this.conn.save(rootPost.post);
@@ -49,6 +54,11 @@ export default class RootPostRepoImpl {
   public async deleteByCreatedAt(date: string) {
     // date を元に削除する
     await this.conn.delete(date);
+    return "deleted!";
+  }
+
+  public async deleteByIds(ids: string[]) {
+    // 渡されたIDを元に削除処理を行う
     return "deleted!";
   }
 }

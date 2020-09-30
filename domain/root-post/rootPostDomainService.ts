@@ -51,7 +51,8 @@ export class RootPostDomainService {
     tagContents: string[],
     status: Status,
     teamId: string,
-    userId: string
+    userId: string,
+    createdAt: string
   ) {
     const newPostId = randomId();
     const rootTags = this.addPostToRootTags(tagContents, newPostId);
@@ -62,6 +63,7 @@ export class RootPostDomainService {
       status,
       teamId,
       userId,
+      createdAt,
     });
     await this.tagRepo.saveAll(rootTags);
 
@@ -85,5 +87,10 @@ export class RootPostDomainService {
   private remove(array: string[], element: string) {
     // 実際はelementをarrayから削除する
     return array;
+  }
+
+  public async deleteRootPosts(criteria: { createdAt: string[] }) {
+    const ids = await this.postRepo.findIds(criteria);
+    await this.postRepo.deleteByIds(ids);
   }
 }
