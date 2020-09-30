@@ -18,8 +18,13 @@ export default class TeamRepoImpl {
     }
 
     public async update(team: Team) {
-      // DB接続
+      // DB書き込み
       console.info(team)
       return true
+    }
+    public async bulkUpdate(teams: Team[]) {
+      // DB書き込み
+      console.info(teams)
+      return teams
     }
 }
