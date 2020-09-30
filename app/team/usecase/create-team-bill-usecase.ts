@@ -1,7 +1,7 @@
 import { Team } from '../../../domain/team/entity/team'
 import { TeamRepository } from '../../../domain/team/repository/team-repository'
 
-export class CreateTeamPaymentUsecase {
+export class CreateTeamBillUsecase {
     private readonly teamRepo: TeamRepository
 
     public constructor(teamRepo: TeamRepository) {
@@ -14,8 +14,8 @@ export class CreateTeamPaymentUsecase {
             const updatedTeams: Team[] = []
             for (const team of teams) {
                 if (team.isPaymentRequired()) {
-                    team.addTeamPayment({ paymentRequiredDate: new Date(), fee: 10000 })
-                    updatedTeams.push(new Team({ id: team.getId(), clerkUserIds: team.getClerkUserIds(), teamPayments: team.getTeamPayments() }))
+                    team.addTeamBill({ paymentRequiredDate: new Date(), fee: 10000 })
+                    updatedTeams.push(new Team({ id: team.getId(), clerkUserIds: team.getClerkUserIds(), TeamBills: team.getTeamBills() }))
                 }
             }
             this.teamRepo.bulkUpdate(updatedTeams)
