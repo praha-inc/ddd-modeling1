@@ -1,4 +1,4 @@
-import { toHash } from "../id"
+import { toHash } from "../../../id"
 
 class Tag {
   public readonly id: string

@@ -1,5 +1,5 @@
-import RootPostRepoImpl from "../infra/rootPostRepoImpl"
-import { RootPostDomainService } from "../domain/root-post/rootPostDomainService"
+import RootPostRepoImpl from "../../../infra/rootPostRepoImpl"
+import { RootPostDomainService } from "../../../domain/root-post/rootPostDomainService"
 
 export class DeletePostAppService {
   private readonly postRepo: RootPostRepoImpl // 本当はinterfaceにするべき

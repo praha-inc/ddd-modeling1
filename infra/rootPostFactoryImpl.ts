@@ -1,7 +1,7 @@
 import { RootPost } from "../domain/root-post/entity/root-post";
 import { RootPostFactory } from "../domain/root-post/factory/rootPostFactory";
 import { Status } from "../domain/root-post/valueObject/status";
-import RootTag from "../domain/rootTag";
+import RootTag from "../domain/root-tag/entity/root-tag";
 import { TeamRepository } from "../domain/team/repository/team-repository";
 import { randomId } from "../id";
 import RootTagRepoImpl from "./rootTagRepoImpl";

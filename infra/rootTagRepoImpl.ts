@@ -1,5 +1,5 @@
 import { RootPost } from "../domain/root-post/entity/root-post";
-import RootTag from "../domain/rootTag";
+import RootTag from "../domain/root-tag/entity/root-tag";
 
 // DB上のテーブル
 type TagDataModel = {};
