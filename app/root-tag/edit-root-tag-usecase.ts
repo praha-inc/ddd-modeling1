@@ -1,4 +1,4 @@
-import RootTagRepoImpl from "../../infra/rootTagRepoImpl"
+import RootTagRepoImpl from "../../infra/root-tag-repository-impl"
 import RootTag from "../../domain/root-tag/entity/root-tag"
 
 export class EditTagAppService {
