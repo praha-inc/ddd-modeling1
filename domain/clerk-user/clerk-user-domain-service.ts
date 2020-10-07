@@ -18,6 +18,6 @@ export class ClerkUserDomainService {
   }
 
   private removeUserFromTeam(team: Team, userId: string) {
-    return new Team({...team}) // memo: この時、teamからuserIdをfindIndexして削除するイメージ。面倒なので省略
+    return new Team({id: team.getId(), clerkUserIds: team.getClerkUserIds(), teamBills: team.getTeamBills()}) // memo: この時、teamからuserIdをfindIndexして削除するイメージ。面倒なので省略
   } 
 }

@@ -11,7 +11,7 @@
 
     public async do(id: string, newUserId: string) {
       try {
-        const newTeam: Team = new Team({id, clerkUserIds: [newUserId]})
+        const newTeam: Team = new Team({id, clerkUserIds: [newUserId], teamBills: [] })
         const persistedTeam = await this.teamRepo.create(newTeam)
         return new TeamDTO(persistedTeam)
       } catch (error) {

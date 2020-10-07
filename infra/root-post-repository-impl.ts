@@ -1,5 +1,5 @@
 import { RootPost } from "../domain/root-post/entity/root-post";
-import { Status } from "../domain/root-post/valueObject/status";
+import { Status } from "../domain/root-post/value-object/status";
 
 // DB上のテーブル
 type PostDataModel = {};
@@ -30,6 +30,7 @@ export default class RootPostRepoImpl {
       teamId: "1",
       userId: "1",
       tagIds: ["1", "2"],
+      isCreatingUserAdmin: false, // 仮
       createdAt: "2020-09-23T10:19:38.468Z",
     });
   }

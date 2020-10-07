@@ -20,25 +20,25 @@ class TeamBill {
 export class Team {
   private readonly id: string
   private readonly clerkUserIds: string[]
-  private readonly TeamBills: TeamBill[]
+  private readonly teamBills: TeamBill[]
   private static limit = 1
   private static PAYMENT_REQUIRED_USER_COUNT = 10
-  public constructor(params: { id: string; clerkUserIds: string[], TeamBills: TeamBill[] }) {
-    const { id, clerkUserIds, TeamBills } = params
+  public constructor(params: { id: string; clerkUserIds: string[], teamBills: TeamBill[] }) {
+    const { id, clerkUserIds, teamBills } = params
 
     if (clerkUserIds.length < Team.limit) {
       throw new Error(`cannot create team with user count below: ${Team.limit}`)
     }
     this.id = id
     this.clerkUserIds = clerkUserIds
-    this.TeamBills = TeamBills
+    this.teamBills = teamBills
   }
   public isEqual(otherTeam: Team) {
     return otherTeam.id === this.id
   }
 
   public isPaid() {
-    return this.TeamBills.every(TeamBill => TeamBill.isPaid())
+    return this.teamBills.every(teamBill => teamBill.isPaid())
   }
 
   public isPaymentRequired() {
@@ -54,10 +54,10 @@ export class Team {
   }
 
   public getTeamBills() {
-    return this.TeamBills
+    return this.teamBills
   }
 
   public addTeamBill({ paymentRequiredDate, fee }: { paymentRequiredDate: Date, fee: Number }) {
-    this.TeamBills.push(new TeamBill({ id: 'dummy', paymentRequiredDate, paid: false, fee}))
+    this.teamBills.push(new TeamBill({ id: 'dummy', paymentRequiredDate, paid: false, fee}))
   }
 }

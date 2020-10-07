@@ -15,7 +15,7 @@
         const team: Team = await this.teamRepo.find(id)
         if (!team) return undefined
 
-        const updatedTeam = new Team({...team})
+        const updatedTeam = new Team({ id: team.getId(), clerkUserIds: team.getClerkUserIds(), teamBills: team.getTeamBills() })
         const persistedTeam = await this.teamRepo.update(updatedTeam)
         return new TeamDTO(persistedTeam)
       } catch (error) {

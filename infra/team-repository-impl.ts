@@ -13,7 +13,7 @@ export default class TeamRepoImpl {
     public async find(id: string) {
       // DB読み込み
       return new Team({
-        id: 'existingTeamId', paid: true
+        id: 'existingTeamId', clerkUserIds: [], teamBills: []
       })
     }
 

@@ -1,4 +1,4 @@
-import { Status } from "../valueObject/status";
+import { Status } from "../value-object/status";
 
 class Post {
   public readonly id: string;

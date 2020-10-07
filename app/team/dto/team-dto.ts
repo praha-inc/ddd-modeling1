@@ -3,7 +3,7 @@
   export class TeamDTO {
     public readonly id: string
     public constructor(team: Team) {
-      this.id = team.id
+      this.id = team.getId()
     }
   }
   
