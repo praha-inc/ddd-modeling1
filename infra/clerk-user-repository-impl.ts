@@ -16,6 +16,7 @@ export default class ClerkUserRepoImpl {
     return new ClerkUser({
       id: randomId(),
       teamId,
+      isAdmin: false // 仮
     });
   }
 }
