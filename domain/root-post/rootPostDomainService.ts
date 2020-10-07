@@ -1,7 +1,7 @@
 import RootPostRepoImpl from "../../infra/rootPostRepoImpl";
 import RootTagRepoImpl from "../../infra/rootTagRepoImpl";
 import { RootPost } from "./entity/root-post";
-import RootTag from "../rootTag";
+import RootTag from "../root-tag/entity/root-tag";
 
 export class RootPostDomainService {
   private readonly postRepo: RootPostRepoImpl; // 本当はinterfaceにするべき

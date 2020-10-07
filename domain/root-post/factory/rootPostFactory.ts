@@ -1,4 +1,4 @@
-import RootTag from "../../rootTag";
+import RootTag from "../../root-tag/entity/root-tag";
 import { RootPost } from "../entity/root-post";
 import { Status } from "../valueObject/status";
 

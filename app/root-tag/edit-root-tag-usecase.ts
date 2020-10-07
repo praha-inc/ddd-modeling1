@@ -1,5 +1,5 @@
-import RootTagRepoImpl from "../infra/rootTagRepoImpl"
-import RootTag from "../domain/rootTag"
+import RootTagRepoImpl from "../../infra/rootTagRepoImpl"
+import RootTag from "../../domain/root-tag/entity/root-tag"
 
 export class EditTagAppService {
   private readonly tagRepo: RootTagRepoImpl // 本当はinterfaceにするべき

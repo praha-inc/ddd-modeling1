@@ -1,7 +1,7 @@
-import { Status } from "../domain/root-post/valueObject/status";
-import RootPostRepoImpl from "../infra/rootPostRepoImpl";
-import RootTagRepoImpl from "../infra/rootTagRepoImpl";
-import { RootPostFactory } from "../domain/root-post/factory/rootPostFactory";
+import { Status } from "../../../domain/root-post/valueObject/status";
+import RootPostRepoImpl from "../../../infra/rootPostRepoImpl";
+import RootTagRepoImpl from "../../../infra/rootTagRepoImpl";
+import { RootPostFactory } from "../../../domain/root-post/factory/rootPostFactory";
 
 export class CreateRootPostAppService {
   private readonly postRepo: RootPostRepoImpl; // 本当はinterfaceにするべき
