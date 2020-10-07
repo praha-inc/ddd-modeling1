@@ -1,5 +1,5 @@
-import RootPostRepoImpl from "../../infra/rootPostRepoImpl";
-import RootTagRepoImpl from "../../infra/rootTagRepoImpl";
+import RootPostRepoImpl from "../../infra/root-post-repository-impl";
+import RootTagRepoImpl from "../../infra/root-tag-repository-impl";
 import { RootPost } from "./entity/root-post";
 import RootTag from "../root-tag/entity/root-tag";
 

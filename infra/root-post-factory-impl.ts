@@ -1,11 +1,11 @@
 import { RootPost } from "../domain/root-post/entity/root-post";
-import { RootPostFactory } from "../domain/root-post/factory/rootPostFactory";
+import { RootPostFactory } from "../domain/root-post/factory/root-post-factory";
 import { Status } from "../domain/root-post/valueObject/status";
 import RootTag from "../domain/root-tag/entity/root-tag";
 import { TeamRepository } from "../domain/team/repository/team-repository";
 import { randomId } from "../id";
-import RootTagRepoImpl from "./rootTagRepoImpl";
-import UserRepoImpl from "./userRepoImpl";
+import RootTagRepoImpl from "./root-tag-repository-impl";
+import UserRepoImpl from "./user-repository-impl";
 
 export class RootPostFactoryImpl implements RootPostFactory {
   private readonly userRepo: UserRepoImpl; // fixme: interfaceにするべき
