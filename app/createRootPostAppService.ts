@@ -1,17 +1,21 @@
-import { RootPost } from "../domain/root-post/entity/root-post";
 import { Status } from "../domain/root-post/valueObject/status";
-import { randomId } from "../id";
 import RootPostRepoImpl from "../infra/rootPostRepoImpl";
-import RootTag from "../domain/rootTag";
 import RootTagRepoImpl from "../infra/rootTagRepoImpl";
+import { RootPostFactory } from "../domain/root-post/factory/rootPostFactory";
 
 export class CreateRootPostAppService {
   private readonly postRepo: RootPostRepoImpl; // 本当はinterfaceにするべき
   private readonly tagRepo: RootTagRepoImpl; // 本当はinterfaceにするべき
+  private readonly postFactory: RootPostFactory;
 
-  constructor(postRepo: RootPostRepoImpl, tagRepo: RootTagRepoImpl) {
+  constructor(
+    postRepo: RootPostRepoImpl,
+    tagRepo: RootTagRepoImpl,
+    postFactory: RootPostFactory
+  ) {
     this.postRepo = postRepo;
     this.tagRepo = tagRepo;
+    this.postFactory = postFactory;
   }
 
   public async do(
@@ -22,45 +26,15 @@ export class CreateRootPostAppService {
     tagContents: string[],
     createdAt: string
   ) {
-    const newPostId = "newPost";
-
-    const rootTags = this.addPostToRootTags(tagContents, newPostId);
-    const rootPost = new RootPost({
-      id: randomId(),
+    const { rootPost, rootTags } = await this.postFactory.createRootPost({
       content,
       status,
       teamId,
       userId,
-      tagIds: rootTags.map((rootTag) => rootTag.tag.id),
+      tagContents,
       createdAt,
     });
     await this.tagRepo.saveAll(rootTags);
     await this.postRepo.save(rootPost);
-  }
-
-  private addPostToRootTags(contents: string[], newPostId: string) {
-    let rootTags: RootTag[] = [];
-
-    for (const content of contents) {
-      let newRootTag;
-      const rootTag = this.tagRepo.findTagByContent(content);
-
-      if (rootTag) {
-        newRootTag = this.addPostToExistingRootTag(rootTag, newPostId);
-      } else {
-        newRootTag = this.createNewRootTag(content, newPostId);
-      }
-      rootTags.push(newRootTag);
-    }
-
-    return rootTags;
-  }
-
-  private addPostToExistingRootTag(rootTag: RootTag, newPostId: string) {
-    return new RootTag(rootTag.tag.content, [...rootTag.postIds, newPostId]);
-  }
-
-  private createNewRootTag(newTagContent: string, newPostId: string) {
-    return new RootTag(newTagContent, [newPostId]);
   }
 }

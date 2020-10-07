@@ -16,4 +16,15 @@ export default class TeamRepoImpl {
         id: 'existingTeamId', paid: true
       })
     }
+
+    public async update(team: Team) {
+      // DB書き込み
+      console.info(team)
+      return true
+    }
+    public async bulkUpdate(teams: Team[]) {
+      // DB書き込み
+      console.info(teams)
+      return teams
+    }
 }

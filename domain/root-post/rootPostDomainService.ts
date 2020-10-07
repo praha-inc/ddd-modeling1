@@ -1,77 +1,15 @@
-import { randomId } from "../../id";
 import RootPostRepoImpl from "../../infra/rootPostRepoImpl";
 import RootTagRepoImpl from "../../infra/rootTagRepoImpl";
 import { RootPost } from "./entity/root-post";
-import { Status } from "./valueObject/status";
 import RootTag from "../rootTag";
-import { TeamRepository } from "../team/repository/team-repository";
 
 export class RootPostDomainService {
   private readonly postRepo: RootPostRepoImpl; // 本当はinterfaceにするべき
   private readonly tagRepo: RootTagRepoImpl; // 本当はinterfaceにするべき
-  private readonly teamRepo: TeamRepository;
 
-  constructor(
-    postRepo: RootPostRepoImpl,
-    tagRepo: RootTagRepoImpl,
-    teamRepo: TeamRepository
-  ) {
+  constructor(postRepo: RootPostRepoImpl, tagRepo: RootTagRepoImpl) {
     this.postRepo = postRepo;
     this.tagRepo = tagRepo;
-    this.teamRepo = teamRepo;
-  }
-
-  private addPostToRootTags(contents: string[], newPostId: string) {
-    let rootTags: RootTag[] = [];
-
-    for (const content of contents) {
-      let newRootTag;
-      const rootTag = this.tagRepo.findTagByContent(content);
-
-      if (rootTag) {
-        newRootTag = this.addPostToExistingRootTag(rootTag, newPostId);
-      } else {
-        newRootTag = this.createNewRootTag(content, newPostId);
-      }
-      rootTags.push(newRootTag);
-    }
-
-    return rootTags;
-  }
-
-  private addPostToExistingRootTag(rootTag: RootTag, newPostId: string) {
-    return new RootTag(rootTag.tag.content, [...rootTag.postIds, newPostId]);
-  }
-  private createNewRootTag(newTagContent: string, newPostId: string) {
-    return new RootTag(newTagContent, [newPostId]);
-  }
-
-  public async createRootPost(
-    content: string,
-    tagContents: string[],
-    status: Status,
-    teamId: string,
-    userId: string,
-    createdAt: string
-  ) {
-    const newPostId = randomId();
-    const rootTags = this.addPostToRootTags(tagContents, newPostId);
-    const rootPost = new RootPost({
-      id: newPostId,
-      content,
-      tagIds: rootTags.map((rootTag) => rootTag.tag.id),
-      status,
-      teamId,
-      userId,
-      createdAt,
-    });
-    await this.tagRepo.saveAll(rootTags);
-
-    const team = await this.teamRepo.find(teamId);
-    if (!team.isPaid()) {
-      throw Error("This team has not paid!");
-    }
-    await this.postRepo.save(rootPost);
   }
 
   public async deleteRootPost(rootPost: RootPost) {
